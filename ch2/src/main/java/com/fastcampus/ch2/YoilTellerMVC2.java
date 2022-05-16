@@ -33,10 +33,10 @@ public class YoilTellerMVC2 {
 		// 2. 작업
 		char yoil = getYoil(year, month, day);
 		
-		// 3. 계산한 결과를 model에 저장
-		model.addAttribute("year", year);
-		model.addAttribute("month", month);
-		model.addAttribute("day", day);
+		// 3. 계산한 결과를 model에 저장(매개 변수로 받은 값들(기본형, String)은 모델에 담지 않아도 뷰에서 사용가능!(예 : ${param.year})
+//		model.addAttribute("year", year);
+//		model.addAttribute("month", month);
+//		model.addAttribute("day", day);
 		model.addAttribute("yoil", yoil);
 		
 		return "yoil"; // /WEB-INF/views/yoil.jsp
