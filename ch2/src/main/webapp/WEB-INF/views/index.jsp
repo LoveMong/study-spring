@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="loginOutLink" value="${sessionScope.id==null ? '/login/login' : '/login/logout' }"/>
-<c:set var="loginOut" value="${sessionScope.id==null ? 'Login' : 'Logout' }"/>
+<!-- 시작 페이지, 로그인 페이지는 session이 필요 없는 페이지  -->
+<!-- session="false" 일때 sessionScope와 pageContext.session은 사용 불가능  -->
+<%@ page session="false" %><!-- 세션을 시작하지 않는다. -->
+<%-- <c:set var="loginOutLink" value="${pageContext.request.getSession(false).getAttribute('id')==null ? '/login/login' : '/login/logout' }"/>
+<c:set var="loginOut" value="${pageContext.request.getSession(false).getAttribute('id')==null ? 'Login' : 'Logout' }"/> --%>
 <!DOCTYPE html>
 <html>
 <head>

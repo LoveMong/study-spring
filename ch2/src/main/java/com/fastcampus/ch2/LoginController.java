@@ -32,7 +32,7 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login")
-	public String login(String id, String pwd, boolean rememberId,
+	public String login(String id, String pwd, boolean rememberId, String toURL,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 //		1. id와 pwd를 확인
@@ -67,8 +67,11 @@ public class LoginController {
 			
 		}		
 		
-//		    2-3. 홈으로 이동		
-		return "index";
+//		    2-3. 홈으로 이동
+//	 	넘어온 toRUL값이 없으면 홈으로, 있으면 toURL값으로 redirect(3항 연산)		
+		toURL = toURL == null || toURL.equals("") ? "/" : toURL; 
+		
+		return "redirect:" + toURL;
 		
 		
 	}

@@ -30,8 +30,12 @@ public class PerformanceFilter implements Filter {
 		// 2. 서블릿 또는 다음 필터를 호출
 		chain.doFilter(request, response); 
 		
-		// 3. 후처리 작업
-		System.out.print("["+((HttpServletRequest)request).getRequestURI()+"]");
+		// 3. 후처리 작업		
+		HttpServletRequest req = (HttpServletRequest)request;
+		String referer = req.getHeader("referer");
+		String method = req.getMethod();
+		// 페이지(jsp)이동 흐름 나타냄
+		System.out.print("[" + referer + "] -> " + method +"[" + req.getRequestURI() + "]");
 		System.out.println(" 소요시간="+(System.currentTimeMillis()-startTime)+"ms");
 	}
 
