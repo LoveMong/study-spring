@@ -82,6 +82,8 @@
     <input class="input-field" type="text" name="email" placeholder="example@fastcampus.co.kr"> 
     <label for="">생일</label>
     <input class="input-field" type="text" name="birth" placeholder="2020/12/31">
+    <input class="input-field" type="text" name="hobby"> 
+    <label for="">취미</label>
     <div class="sns-chk">
         <label><input type="checkbox" name="sns" value="facebook"/>페이스북</label>
         <label><input type="checkbox" name="sns" value="kakaotalk"/>카카오톡</label>
