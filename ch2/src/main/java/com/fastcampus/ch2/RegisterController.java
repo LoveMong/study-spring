@@ -4,6 +4,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 
 import javax.annotation.PostConstruct;
+import javax.validation.Valid;
 import javax.xml.crypto.Data;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -35,6 +36,7 @@ public class RegisterController {
 //		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 //		binder.registerCustomEditor(Data.class,	new CustomDateEditor(df, false));
 		binder.registerCustomEditor(String[].class,	new StringArrayPropertyEditor("#"));
+		binder.setValidator(new UserValidator()); // UserValidator를 WebDataBinder의 로컬 validator로 등록
 	}
 	
 	@GetMapping("/add")
@@ -45,20 +47,29 @@ public class RegisterController {
 	
 //	@RequestMapping(value = "/register/save", method = RequestMethod.POST)
 	@PostMapping("/save") // 4.3버전 이후 부터 사용 가능
-	public String save(User user, BindingResult result, Model model) throws Exception {
+	public String save(@Valid User user, BindingResult result, Model model) throws Exception {
 		
 		System.out.println("user : " + user);
 		
-//		1. 유효성 검사
+		// 수동 검증 - Validator를 직접 생성하고, validate()를 직접 호출
+//		UserValidator userValidator = new UserValidator();
+//		userValidator.validate(user, result);
 		
-		if(!isValid(user)) {
-			String msg = "id를 잘못입력하셨습니다.";
-			model.addAttribute("msg", msg);
-			return "redirect:/register/add";
-			
-//			String msg = URLEncoder.encode("id를 잘못입력하셨습니다.", "utf-8");
-//			return "redirect:/register/add?msg=" + msg; // URL 재작성(ReWriting)
+		// User객체를 검증한 결과 에러가 있으면, registerForm을 이용해서 에러를 보여줘야 함.		
+		if (result.hasErrors()) {
+			return "registerForm";			
 		}
+		
+////		1. 유효성 검사
+//		
+//		if(!isValid(user)) {
+//			String msg = "id를 잘못입력하셨습니다.";
+//			model.addAttribute("msg", msg);
+//			return "redirect:/register/add";
+//			
+////			String msg = URLEncoder.encode("id를 잘못입력하셨습니다.", "utf-8");
+////			return "redirect:/register/add?msg=" + msg; // URL 재작성(ReWriting)
+//		}
 		
 		
 //		2. DB에 신규회원 정보를 저장
