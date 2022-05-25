@@ -49,6 +49,32 @@ class Car {
     }
 }
 
+@Component
+@PropertySource("setting.properties")
+class SysInfo {
+    @Value("#{systemProperties['user.timezone']}")
+    String timeZone;
+    @Value("#{systemEnvironment['PWD']}")
+    String currDir;
+    @Value("${autosaveDir}")
+    String autosaveDir;
+    @Value("${autosaveInterval}")
+    int autosaveInterval;
+    @Value("${autosave}")
+    boolean autosave;
+
+    @Override
+    public String toString() {
+        return "SysInfo{" +
+                "timeZone='" + timeZone + '\'' +
+                ", currDir='" + currDir + '\'' +
+                ", autosaveDir='" + autosaveDir + '\'' +
+                ", autosaveInterval=" + autosaveInterval +
+                ", autosave=" + autosave +
+                '}';
+    }
+}
+
 public class ApplicationContextTest {
     public static void main(String[] args) {
         ApplicationContext ac = new GenericXmlApplicationContext("config.xml");
@@ -58,6 +84,12 @@ public class ApplicationContextTest {
         System.out.println("car = " + car);
 
 
+        System.out.println("ac.getBean(SysInfo.class) = " + ac.getBean(SysInfo.class));
+        Map<String, String> map = System.getenv();
+        System.out.println("map = " + map);
+
+        Properties properties = System.getProperties();
+        System.out.println("properties = " + properties);
 
     }
 }
