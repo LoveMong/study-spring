@@ -168,4 +168,38 @@ public class DBConnectionTest2Test {
         assertTrue(conn != null); // (Test에는 assert문 필요) 괄호 안에 조건식이 true면, 테스트 성공, 아니면 실패
     }
 
+    @Test
+    public void transactionTest() throws Exception {
+        Connection conn = null;
+        try {
+            deleteAll();
+            conn = ds.getConnection();
+            conn.setAutoCommit(true);
+
+            String sql = "insert into user_info values(?, ?, ?, ?, ?, ?, now())";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, "asdf");
+            pstmt.setString(2, "1234");
+            pstmt.setString(3, "avc");
+            pstmt.setString(4, "aaa@aaaa");
+            pstmt.setDate(5, new java.sql.Date(new Date().getTime()));
+            pstmt.setString(6, "fb");
+
+            int rowCnt = pstmt.executeUpdate();
+
+            pstmt.setString(1, "asdf");
+            rowCnt = pstmt.executeUpdate();
+
+            conn.commit();
+
+        } catch (Exception e) {
+            conn.rollback();
+            e.printStackTrace();
+        } finally {
+
+        }
+    }
+
 }
