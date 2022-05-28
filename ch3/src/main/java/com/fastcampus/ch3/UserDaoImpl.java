@@ -157,9 +157,9 @@ public class UserDaoImpl implements UserDao {
         PreparedStatement pstmt = conn.prepareStatement(sql); // SQL Injection공격, 성능향상
         pstmt.executeUpdate(); //  insert, delete, update
     }
-
     private void close(AutoCloseable... acs) {
         for(AutoCloseable ac :acs)
             try { if(ac!=null) ac.close(); } catch(Exception e) { e.printStackTrace(); }
     }
+
 }
