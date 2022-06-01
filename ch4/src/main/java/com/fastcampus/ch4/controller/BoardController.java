@@ -24,19 +24,74 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
+    @PostMapping("/modify")
+    public String modify(BoardDto boardDto, Integer page, Integer pageSize, HttpSession session, Model m, RedirectAttributes rattr) {
+        String writer = (String) session.getAttribute("id");
+        boardDto.setWriter(writer);
+        System.out.println("page = " + page);
+        System.out.println("pageSize = " + pageSize);
+
+        try {
+            // redirect로 paramater 전달 시 RedirectAttributes 에 담아서 사용 model에 담지 말자
+//            m.addAttribute("page", page); (X) RedirectAttributes와 동시 사용 안됨
+            rattr.addAttribute("page", page);
+            rattr.addAttribute("pageSize", pageSize);
+            int rowCont = boardService.modify(boardDto); // insert
+
+            if (rowCont != 1) {
+                throw new Exception("Modify failed");
+            }
+
+            rattr.addFlashAttribute("msg", "MOD_OK");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.addAttribute(boardDto); // 예외 발생 시 작성한 내용 전달
+            rattr.addFlashAttribute("msg", "MOD_ERR");
+            return "board";
+        }
+        return "redirect:/board/list";
+    }
+
     @GetMapping("/write")
     public String write(Model m) {
         m.addAttribute("mode", "new");
         return "board"; // 읽기와 쓰기에 사용, 쓰기에 사용할때는 mode = new
     }
 
+    @PostMapping("/write")
+    public String write(BoardDto boardDto,HttpSession session, Model m, RedirectAttributes rattr) {
+        String writer = (String) session.getAttribute("id");
+        boardDto.setWriter(writer);
+
+        try {
+            int rowCont = boardService.write(boardDto); // insert
+
+            if (rowCont != 1) {
+                throw new Exception("Write failed");
+            }
+
+            rattr.addFlashAttribute("msg", "WRT_OK");
+
+            return "redirect:/board/list";
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.addAttribute(boardDto); // 예외 발생 시 작성한 내용 전달
+            rattr.addFlashAttribute("msg", "WRT_ERR");
+            return "board";
+        }
+
+    }
+
     @PostMapping("/remove")
     public String remove(Integer bno, Integer page, Integer pageSize, HttpSession session, Model m, RedirectAttributes rattr) {
         String writer = (String)session.getAttribute("id");
+        System.out.println("page = " + page);
+        System.out.println("pageSize = " + pageSize);
 
         try {
-            m.addAttribute("page", page);
-            m.addAttribute("pageSize", pageSize);
+            rattr.addAttribute("pageSize", pageSize);
+            rattr.addAttribute("page", page);
             int rowCont = boardService.remove(bno, writer);
 
             if (rowCont != 1) {

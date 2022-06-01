@@ -20,6 +20,7 @@
         <li><a href=""><i class="fas fa-search small"></i></a></li>
     </ul>
 </div><div style="text-align:center">
+    <button type="button" id="writeBtn" onclick="location.href='<c:url value="/board/write"/>'">글쓰기</button>
     <table border="1">
         <tr>
             <th>번호</th>
@@ -54,11 +55,14 @@
 <script>
 <%-- ==는 '같다'입니다. 변수 타입과 상관없이 값이 같으면 참입니다.
      ===는 '엄격하게 같다'입니다. '엄격하게'의 의미는 변수 타입까지 고려한다는 것입니다. 변수의 값 뿐 아니라 변수의 타입까지 같아야 참입니다 --%>
-    let msg = "${msg}"
-    if (msg === "DEL_OK") {
-        alert("삭제에 성공했습니다.");
-    }
-    if (msg == "DEL_ERR") {
+let msg = "${msg}"
+if (msg === "WRT_OK") {
+    alert("성공적으로 등록되었습니다.");
+}
+if (msg === "DEL_OK") {
+    alert("삭제에 성공했습니다.");
+}
+if (msg == "DEL_ERR") {
         alert("삭제에 실패했습니다.");
     }
 </script>
