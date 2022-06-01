@@ -2,18 +2,23 @@ package com.fastcampus.ch4.controller;
 
 import com.fastcampus.ch4.domain.BoardDto;
 import com.fastcampus.ch4.domain.PageHandler;
+import com.fastcampus.ch4.domain.SearchCondition;
 import com.fastcampus.ch4.service.BoardService;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,17 +30,15 @@ public class BoardController {
     BoardService boardService;
 
     @PostMapping("/modify")
-    public String modify(BoardDto boardDto, Integer page, Integer pageSize, HttpSession session, Model m, RedirectAttributes rattr) {
+    public String modify(BoardDto boardDto, SearchCondition sc, HttpSession session, Model m, RedirectAttributes rattr) {
         String writer = (String) session.getAttribute("id");
         boardDto.setWriter(writer);
-        System.out.println("page = " + page);
-        System.out.println("pageSize = " + pageSize);
 
         try {
             // redirect로 paramater 전달 시 RedirectAttributes 에 담아서 사용 model에 담지 말자
 //            m.addAttribute("page", page); (X) RedirectAttributes와 동시 사용 안됨
-            rattr.addAttribute("page", page);
-            rattr.addAttribute("pageSize", pageSize);
+//            rattr.addAttribute("page", sc.getPage());
+//            rattr.addAttribute("pageSize", sc.getPageSize());
             int rowCont = boardService.modify(boardDto); // insert
 
             if (rowCont != 1) {
@@ -50,7 +53,7 @@ public class BoardController {
             rattr.addFlashAttribute("msg", "MOD_ERR");
             return "board";
         }
-        return "redirect:/board/list";
+        return "redirect:/board/list" + sc.getQueryString();
     }
 
     @GetMapping("/write")
@@ -84,14 +87,10 @@ public class BoardController {
     }
 
     @PostMapping("/remove")
-    public String remove(Integer bno, Integer page, Integer pageSize, HttpSession session, Model m, RedirectAttributes rattr) {
+    public String remove(Integer bno, SearchCondition sc, HttpSession session, Model m, RedirectAttributes rattr) {
         String writer = (String)session.getAttribute("id");
-        System.out.println("page = " + page);
-        System.out.println("pageSize = " + pageSize);
 
         try {
-            rattr.addAttribute("pageSize", pageSize);
-            rattr.addAttribute("page", page);
             int rowCont = boardService.remove(bno, writer);
 
             if (rowCont != 1) {
@@ -104,52 +103,43 @@ public class BoardController {
             rattr.addFlashAttribute("msg", "DEL_ERR");
         }
 
-        return "redirect:/board/list";
+        return "redirect:/board/list" + sc.getQueryString();
     }
 
     @GetMapping("/read")
-    public String read(Integer bno, Integer page, Integer pageSize, Model m) {
+    public String read(Integer bno, SearchCondition sc, Model m) {
         try {
             BoardDto boardDto = boardService.read(bno);
 //            m.addAttribute("boardDto", boardDto); - 아래 문장과 동일
             m.addAttribute(boardDto);
-            m.addAttribute("page", page);
-            m.addAttribute("pageSize", pageSize);
+            m.addAttribute("page", sc.getPage());
+            m.addAttribute("pageSize", sc.getPageSize());
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "board";
     }
 
-    @GetMapping("/list")
-    public String list(Integer page, Integer pageSize, Model m, HttpServletRequest request) {
+    @GetMapping("/list")//@ModelAttribute 생략가능
+    public String list(@ModelAttribute SearchCondition sc, Model m, HttpServletRequest request) {
         if (!loginCheck(request))
             return "redirect:/login/login?toURL=" + request.getRequestURL();  // 로그인을 안했으면 로그인 화면으로 이동
 
-        if (page == null) {
-            page = 1;
-        }
-
-        if (pageSize == null) {
-            pageSize = 10;
-        }
-
         try {
-            int totalCnt = boardService.getCount();
-            PageHandler ph = new PageHandler(totalCnt, page, pageSize);
+            int totalCnt = boardService.getSearchResultCnt(sc);
+            m.addAttribute("totalCnt", totalCnt);
 
+            PageHandler ph = new PageHandler(totalCnt, sc);
 
-            Map map = new HashMap();
-            map.put("offset", (page - 1) * pageSize);
-            map.put("pageSize", pageSize);
-
-            List<BoardDto> list = boardService.getPage(map);
+            List<BoardDto> list = boardService.getSearchResultPage(sc);
             m.addAttribute("list", list);
             m.addAttribute("ph", ph);
-            m.addAttribute("page", page);
-            m.addAttribute("pageSize", pageSize);
+
+
         } catch (Exception e) {
             e.printStackTrace();
+            m.addAttribute("msg", "List_ERR");
+            m.addAttribute("totalCnt", 0);
         }
 
 
