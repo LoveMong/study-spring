@@ -23,7 +23,6 @@ public class BoardDaoImplTest {
     @Autowired
     private BoardDao boardDao;
 
-
     @Test
     public void searchSelectPageTest() throws Exception {
         boardDao.deleteAll();
@@ -32,13 +31,13 @@ public class BoardDaoImplTest {
             boardDao.insert(boardDto);
         }
 
-        SearchCondition sc = new SearchCondition(1, 10, "title2", "T");
+        SearchCondition sc = new SearchCondition(1, 10, "asdf", "W");
 //        List<BoardDto> list = boardDao.searchSelectPage(sc);
 //        System.out.println("list = " + list);
 //        assertTrue(list.size() == 2);
         int cnt = boardDao.searchResultCnt(sc);
         System.out.println("cnt = " + cnt);
-        assertTrue(cnt == 2);
+        assertTrue(cnt == 20);
     }
 
     @Test

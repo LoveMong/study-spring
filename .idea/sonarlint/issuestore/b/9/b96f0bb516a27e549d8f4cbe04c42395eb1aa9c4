@@ -1,0 +1,121 @@
+
+C
+java:S2699,"-Add at least one assertion to this test case.(Ò‚á¦
+/
+java:S5785("Use assertEquals instead.(²Å¤ª
+4
+java:S57858"Use assertEquals instead.(¯æïŠùÿÿÿÿ
+4
+java:S5785;"Use assertEquals instead.(»„øÿÿÿÿ
+/
+java:S5785<"Use assertEquals instead.(³Âä˜
+4
+java:S5785>"Use assertEquals instead.(»„øÿÿÿÿ
+4
+java:S5785?"Use assertEquals instead.(ÏŸºÏùÿÿÿÿ
+4
+java:S5785E"Use assertEquals instead.(¯æïŠùÿÿÿÿ
+4
+java:S5785H"Use assertEquals instead.(»„øÿÿÿÿ
+4
+java:S5785I"Use assertEquals instead.(ÜÑÆÉùÿÿÿÿ
+4
+java:S5785J"Use assertEquals instead.(¯æïŠùÿÿÿÿ
+4
+java:S5785M"Use assertEquals instead.(»„øÿÿÿÿ
+4
+java:S5785N"Use assertEquals instead.(»„øÿÿÿÿ
+4
+java:S5785O"Use assertEquals instead.(Ïç™Ìùÿÿÿÿ
+4
+java:S5785P"Use assertEquals instead.(¯æïŠùÿÿÿÿ
+4
+java:S5785V"Use assertEquals instead.(¯æïŠùÿÿÿÿ
+4
+java:S5785Y"Use assertEquals instead.(»„øÿÿÿÿ
+.
+java:S5785["Use assertEquals instead.(àÅœ"
+4
+java:S5785\"Use assertEquals instead.(¯æïŠùÿÿÿÿ
+4
+java:S5785^"Use assertEquals instead.(»„øÿÿÿÿ
+/
+java:S5785`"Use assertEquals instead.(·‘„×
+/
+java:S5785a"Use assertEquals instead.(³Âä˜
+.
+java:S5785c"Use assertEquals instead.(àÅœ"
+4
+java:S5785d"Use assertEquals instead.(¯æïŠùÿÿÿÿ
+4
+java:S5785f"Use assertEquals instead.(»„øÿÿÿÿ
+4
+java:S5785h"Use assertEquals instead.(îÅ´úÿÿÿÿ
+/
+java:S5785i"Use assertEquals instead.(³Âä˜
+4
+java:S5785p"Use assertEquals instead.(»„øÿÿÿÿ
+4
+java:S5785s"Use assertEquals instead.(»„øÿÿÿÿ
+4
+java:S5785t"Use assertEquals instead.(ÏŸºÏùÿÿÿÿ
+4
+java:S5785x"Use assertEquals instead.(»„øÿÿÿÿ
+/
+java:S5785y"Use assertEquals instead.(³Âä˜
+4
+java:S5785"Use assertEquals instead.(¯æïŠùÿÿÿÿ
+5
+java:S5785‚"Use assertEquals instead.(‹¿Æ¾üÿÿÿÿ
+5
+java:S5785…"Use assertEquals instead.(»„øÿÿÿÿ
+0
+java:S5785ˆ"Use assertEquals instead.(òØšı
+5
+java:S5785Š"Use assertEquals instead.(»„øÿÿÿÿ
+0
+java:S5785Œ"Use assertEquals instead.(…÷Üµ
+5
+java:S5785’"Use assertEquals instead.(¯æïŠùÿÿÿÿ
+5
+java:S5785•"Use assertEquals instead.(»„øÿÿÿÿ
+5
+java:S5785š"Use assertEquals instead.(›¹ñêıÿÿÿÿ
+0
+java:S5785«"Use assertEquals instead.(’ö—İ
+0
+java:S5785¬"Use assertEquals instead.(èÁ¬ß
+0
+java:S5785­"Use assertEquals instead.(”µ¥
+0
+java:S5785´"Use assertEquals instead.(’ö—İ
+0
+java:S5785»"Use assertEquals instead.(©İî
+5
+java:S5785¼"Use assertEquals instead.(ÈÌ·Õüÿÿÿÿ
+5
+java:S5785½"Use assertEquals instead.(–„†¹úÿÿÿÿ
+5
+java:S5785Ä"Use assertEquals instead.(»„øÿÿÿÿ
+5
+java:S5785Ê"Use assertEquals instead.(‡“ÿ¿ıÿÿÿÿ
+5
+java:S5785Í"Use assertEquals instead.(›¹ñêıÿÿÿÿ
+5
+java:S5785Ó"Use assertEquals instead.(¯æïŠùÿÿÿÿ
+5
+java:S5785Ö"Use assertEquals instead.(»„øÿÿÿÿ
+0
+java:S5785×"Use assertEquals instead.(³Âä˜
+5
+java:S5785Ú"Use assertEquals instead.( šûçıÿÿÿÿ
+1
+java:S5785İ"Use assertNotNull instead.(ªŠÎ©
+5
+java:S5785Ş"Use assertEquals instead.(ˆã¬ªùÿÿÿÿ
+5
+java:S5785à"Use assertEquals instead.( šûçıÿÿÿÿ
+1
+java:S5785â"Use assertNotNull instead.(ªŠÎ©
+5
+java:S5785ã"Use assertEquals instead.(š¤ƒşÿÿÿÿ

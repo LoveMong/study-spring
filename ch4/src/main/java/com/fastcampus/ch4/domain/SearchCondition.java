@@ -11,6 +11,7 @@ public class SearchCondition {
 
     public SearchCondition() {
 
+
     }
     public SearchCondition(Integer page, Integer pageSize, String keyword, String option) {
         this.page = page;
@@ -80,4 +81,5 @@ public class SearchCondition {
                 ", option='" + option + '\'' +
                 '}';
     }
+
 }
