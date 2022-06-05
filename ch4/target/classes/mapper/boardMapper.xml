@@ -94,6 +94,4 @@
         WHERE true
         <include refid="searchCondition"/>
     </select>
-
-
 </mapper>

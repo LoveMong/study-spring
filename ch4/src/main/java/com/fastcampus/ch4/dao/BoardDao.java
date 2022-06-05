@@ -2,10 +2,11 @@ package com.fastcampus.ch4.dao;
 
 import com.fastcampus.ch4.domain.BoardDto;
 import com.fastcampus.ch4.domain.SearchCondition;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
-
+@Repository
 public interface BoardDao {
     int count() throws Exception // T selectOne(String statement)
     ;
@@ -39,4 +40,6 @@ public interface BoardDao {
 
     List<BoardDto> searchSelectPage(SearchCondition sc) throws Exception // List<E> selectList(String statement, Object parameter)
     ;
+
+    int updateCommentCnt(Integer bno, int cnt);
 }

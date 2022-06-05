@@ -2,10 +2,11 @@ package com.fastcampus.ch4.service;
 
 import com.fastcampus.ch4.domain.BoardDto;
 import com.fastcampus.ch4.domain.SearchCondition;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-
+@Service
 public interface BoardService {
     int getCount() throws Exception;
 
